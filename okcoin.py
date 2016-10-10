@@ -1,14 +1,16 @@
 import urllib.request
 import json
+from pymongo import MongoClient
+from time import sleep
 
 class OkCoin(object):
     def __init__(self):
        "some"
        self.root_url = "https://www.okcoin.cn/"
+       self.db = MongoClient("localhost")["okcoin"]
 
     def query_api(self, api_path):
         url = self.root_url + api_path
-        print(url)
         resp = urllib.request.urlopen(url)
         respstr = resp.read()
         return json.loads(respstr.decode())
@@ -19,12 +21,23 @@ class OkCoin(object):
     def get_depth(self):
         return self.query_api("api/v1/depth.do?symbol=btc_cny")
 
+    def save_tiker_data(self):
+        coll = self.db.get_collection("ticker_data")
+        data = self.get_ticker()
+        t = data["date"]
+        # save if not exists
+        if coll.find_one({"date": t}) is None:
+            res = coll.insert_one(data)
+            print(res.inserted_id)
+
+    def run_ticker(self):
+        while(1):
+            self.save_tiker_data()
+            sleep(0.5)
+
 def main():
     okcoin = OkCoin()
-    deps = okcoin.get_depth()
-    ticker = okcoin.get_ticker()
-    print(ticker)
-    # print(deps)
+    okcoin.run_ticker()
 
 if __name__ == '__main__':
     main()
