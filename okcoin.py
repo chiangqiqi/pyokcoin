@@ -23,11 +23,13 @@ class OkCoin(object):
 
     def save_tiker_data(self):
         coll = self.db.get_collection("ticker_data")
-        data = self.get_ticker()
-        t = data["date"]
+        ticker_data = self.get_ticker()
+        deps_data = self.get_depth()
+        ticker_data["deps"] = deps_data
+        t = ticker_data["date"]
         # save if not exists
         if coll.find_one({"date": t}) is None:
-            res = coll.insert_one(data)
+            res = coll.insert_one(ticker_data)
             print(res.inserted_id)
 
     def run_ticker(self):
