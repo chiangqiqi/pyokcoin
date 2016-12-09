@@ -1,8 +1,8 @@
 import pandas as pd
 from datetime import datetime
-from trade_data import TradeData
 from  collections import namedtuple
 import json
+from .trade_data import TradeData
 
 class Ticker(object):
     def __init__(self, jsonstr):
