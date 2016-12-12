@@ -1,3 +1,1 @@
-import analy
-
-__all__ = [analy]
+__all__ = ['analy']
