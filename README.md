@@ -1,6 +1,13 @@
-# OkCoin 非官方客户端 #
+# OKCoin 非官方客户端 #
 
-需要 `python3` 
+OKCoin python restful api 的 python client. 支持账户查询和交易
 
-## 数据拉取部分 ##
-`websocket` 使用 https://github.com/aaugustin/websockets 库
+
+## 用法 ##
+`python setup.py install`
+
+## Example ##
+在 `example` 文件夹中有示例，现在的功能比较简易
+
+## Others ##
+欢迎 pull requests :-)

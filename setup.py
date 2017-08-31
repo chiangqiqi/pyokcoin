@@ -2,13 +2,13 @@
 
 from  setuptools import setup, find_packages
 
-install_requires = ['pymongo']
+install_requires = ['requests']
 
 setup(
         name='pyokcoin',
-        author='Qiqi Jiang',
-        version='0.0.1',
-        description='get trade info from okcoin and try to analysis',
+        author='Alex Jiang',
+        version='0.0.2',
+        description='okcoin simple restful api',
         packages=find_packages(),
         install_requires=install_requires
 )
